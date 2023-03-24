@@ -466,6 +466,7 @@ let ColorSchemeButton = React.forwardRef<
 
 function VersionWarning() {
   let { isLatest, branches, currentGitHubRef } = useLoaderData<typeof loader>();
+  let { "*": splat } = useParams();
 
   if (isLatest) return null;
 
@@ -479,7 +480,10 @@ function VersionWarning() {
     <div className="hidden lg:block">
       <div className="animate-[bounce_500ms_2.5] bg-blue-brand p-2 text-xs text-white">
         {warning}.{" "}
-        <Link to="/docs/en/main" className="underline">
+        <Link
+          to={splat ? `/docs/en/main/${splat}` : "/docs/en/main"}
+          className="underline"
+        >
           View latest
         </Link>
       </div>
